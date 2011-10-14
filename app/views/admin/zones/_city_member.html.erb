@@ -1,0 +1,5 @@
+<li>
+  <%= f.hidden_field :zoneable_type, :value => "City" %>
+  <%= f.collection_select(:zoneable_id, @cities, :id, :state_and_city, :include_blank => true) %>
+  <%= remove_nested f %>
+</li>
