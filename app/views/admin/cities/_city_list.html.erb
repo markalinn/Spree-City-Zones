@@ -1,0 +1,32 @@
+<table class="index" id='listing_citys'>
+  <thead>
+    <tr>
+      <th><%= t("name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cities.each do |city|
+    	state = city.state
+    	country = @state.country
+     %>
+      <tr id="<%= dom_id city %>">
+        <td><%=city.name %></td>
+        <td class="actions">
+          <%= link_to_with_icon 'edit', t("edit"), edit_admin_country_state_city_url(country, state, city), :class => 'edit' %>
+          &nbsp;
+          <%= link_to 'Delete', admin_country_state_city_url(country, state, city), :method => 'delete' %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @cities.empty? %>
+      <tr><td colspan="3"><%= t(:none) %></td></tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="new_city"></div>
+<p>
+  <%= button_link_to t("new_city"), new_admin_country_state_city_url(@country,@state), {:remote => true,
+                                                                             :icon => 'add',
+                                                                              :id => 'new_city'} %>
+</p>

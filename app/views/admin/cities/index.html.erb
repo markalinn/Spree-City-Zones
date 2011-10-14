@@ -1,0 +1,23 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1><%= t("Cities") %></h1>
+
+<p>
+  <label for="country"><%= t('country') %></label>
+  <select id="country" class='observe_field' data-base-url="<%=admin_states_path(:format => :js)%>?country_id=" data-update="#state-list">
+  <%= options_from_collection_for_select(@countries, :id, :name, @country.id) %>
+  </select>
+</p>
+
+<p>
+  <label for="state"><%= t('state') %></label>
+  <select id="state" class='observe_field' data-base-url="<%=admin_cities_path(:format => :js)%>?country_id=<%= @country.id %>&state_id=" data-update="#city-list">
+  <%= options_from_collection_for_select(@states, :id, :name, @state.id) %>
+  </select>
+</p>
+
+<%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
+
+<div id="city-list">
+  <%=render :partial => 'city_list'%>
+</div>

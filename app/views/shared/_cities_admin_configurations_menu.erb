@@ -1,0 +1,4 @@
+      <tr>
+        <td><%= link_to t("Cities"), admin_country_state_cities_path(Spree::Config[:default_country_id],State.find(:first, :conditions => {:country_id => Spree::Config[:default_country_id], :abbr => 'CA'})) %></td>
+        <td><%= t("cities_description") %></td>
+      </tr>
