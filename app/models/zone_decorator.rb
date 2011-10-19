@@ -20,4 +20,33 @@ Zone.class_eval do
       end
     end
   end
+
+  def kind
+    member = self.members.last
+    case member && member.zoneable_type
+    when "City"   then "city"
+    when "State"  then "state"
+    when "Zone"   then "zone"
+    else
+      "country"
+    end
+  end
+
+  def country_list
+    members.map {|zone_member|
+      case zone_member.zoneable_type
+      when "Zone"
+        zone_member.zoneable.country_list
+      when "Country"
+        zone_member.zoneable
+      when "State"
+        zone_member.zoneable.country
+      when "City"
+        zone_member.zoneable.country
+      else
+        nil
+      end
+    }.flatten.compact.uniq
+  end
+  
 end
